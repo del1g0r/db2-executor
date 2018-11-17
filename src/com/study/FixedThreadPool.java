@@ -18,7 +18,7 @@ public class FixedThreadPool implements Executor {
     }
 
     @Override
-    public synchronized void execute(Runnable command) {
+    public void execute(Runnable command) {
         try {
             queue.put(command);
         } catch (InterruptedException e) {
@@ -26,7 +26,7 @@ public class FixedThreadPool implements Executor {
         }
     }
 
-    synchronized void shutdown() {
+    void shutdown() {
         for (ExecutorThread thread : threads) {
             thread.interrupt();
         }
